@@ -2,21 +2,17 @@ import { useReducer, useEffect, useState } from 'react';
 import todoReducer, { ADD_TODO, DELETE_TODO, TOGGLE_TODO } from '../reducers/todoReducer';
 
 const TodoManager = ({ theme }) => {
-  // Load todos from localStorage or start empty
   const [todos, dispatch] = useReducer(todoReducer, [], () => {
     const savedTodos = localStorage.getItem('todos');
     return savedTodos ? JSON.parse(savedTodos) : [];
   });
 
-  // Save todos to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  // State for the input field
   const [inputText, setInputText] = useState('');
 
-  // Add a new todo
   const addTodo = () => {
     if (inputText.trim()) {
       const newTodo = {
@@ -30,19 +26,16 @@ const TodoManager = ({ theme }) => {
     }
   };
 
-  // Delete a todo
   const deleteTodo = (id) => {
     dispatch({ type: DELETE_TODO, payload: id });
   };
 
-  // Toggle todo completion
   const toggleComplete = (id) => {
     dispatch({ type: TOGGLE_TODO, payload: id });
   };
 
   return (
     <div>
-      {/* Input Form */}
       <div className="flex gap-2 mb-4">
         <input
           type="text"
@@ -58,13 +51,12 @@ const TodoManager = ({ theme }) => {
         />
         <button
           onClick={addTodo}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
           Add
         </button>
       </div>
 
-      {/* Todo List */}
       <ul className="space-y-2">
         {todos.length === 0 ? (
           <p className={`text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
