@@ -1,6 +1,6 @@
 import { useTheme } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
-
+import TodoManager from './components/TodoManager'
 function App() {
   const { theme, toggleTheme } = useTheme();
 
@@ -12,6 +12,7 @@ function App() {
             Advanced Todo App
           </h1>
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+          <TodoManager />
         </div>
         
         <div className={`p-8 rounded-lg text-center ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
